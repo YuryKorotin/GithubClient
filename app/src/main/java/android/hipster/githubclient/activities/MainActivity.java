@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @AfterViews
-    void addViews() {
+    void syncViews() {
         setSupportActionBar(mToolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
