@@ -4,9 +4,13 @@ package android.hipster.githubclient.util;
  * Created by yurykorotin on 02/04/16.
  */
 public class Consts {
-    public final static String CLIENT_ID = "16fa07a3f76b46ddf84cp";
+    public final static String AUTH_TOKEN_CACHE_KEY = "auth token";
 
-    public final static String CLIENT_SECRET = "93fd40e230a4b35d194d33955a5af9e7179fee72";
+    public final static String CLIENT_ID = "18f8e72079c2a9b52be9";
 
+    public final static String CLIENT_SECRET = "f57bd7fd072ae56e17246bdbfa4a13127258825b";
 
+    public final static String API_NOTE = "Github Android Client";
+
+    public final static String[] API_SCOPES = {"public_repo", "notifications", "user"};
 }

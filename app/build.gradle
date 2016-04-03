@@ -70,4 +70,6 @@ dependencies {
 
     compile 'com.octo.android.robospice:robospice:1.4.14'
     compile 'com.octo.android.robospice:robospice-spring-android:1.4.14'
+
+    compile 'com.google.guava:guava:18.0'
 }

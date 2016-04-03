@@ -18,6 +18,7 @@ public class HttpBasicAuthenticatorInterceptor implements ClientHttpRequestInter
                                         ClientHttpRequestExecution execution) throws IOException {
 
         request.getHeaders().set("User-Agent", "GithubViewer");
+        request.getHeaders().set("Accept", "application/vnd.github.v3.json");
 
         return execution.execute(request, body);
     }

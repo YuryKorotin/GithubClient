@@ -19,4 +19,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="application_authorization_error">Application authorization error has occured</string>
 </resources>

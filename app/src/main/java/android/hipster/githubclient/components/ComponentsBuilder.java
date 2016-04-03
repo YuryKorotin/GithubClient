@@ -4,6 +4,7 @@ import android.content.Context;
 import android.hipster.githubclient.GithubClientApplication;
 import android.hipster.githubclient.activities.LoginActivity;
 import android.hipster.githubclient.modules.AppModule;
+import android.hipster.githubclient.modules.LoginActivityModule;
 import android.util.Log;
 
 /**
@@ -22,7 +23,7 @@ public class ComponentsBuilder {
 
     public static LoginActivityComponent getLoginActivityComponent(Context context) {
         if(sLoginActivityComponent == null) {
-            sLoginActivityComponent = DaggerLoginActivityComponent.builder().build();
+            sLoginActivityComponent = DaggerLoginActivityComponent.builder().loginActivityModule(new LoginActivityModule()).appModule(new AppModule()).build();
         }
         return sLoginActivityComponent;
     }

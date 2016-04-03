@@ -9,7 +9,7 @@ import android.hipster.githubclient.components.ComponentsBuilder;
  * Created by yurykorotin on 01/04/16.
  */
 public class GithubClientApplication extends Application{
-    private final GithubClientApplication mInstance;
+    private static GithubClientApplication mInstance;
     protected ApplicationComponent mApplicationComponent;
 
     public GithubClientApplication() {
@@ -28,7 +28,7 @@ public class GithubClientApplication extends Application{
         mApplicationComponent.inject(this);
     }
 
-    public static GithubClientApplication get(Context context){
-        return (GithubClientApplication) context.getApplicationContext();
+    public static GithubClientApplication get(){
+        return mInstance;
     }
 }

@@ -4,7 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
+import android.hipster.githubclient.AuthManager;
 import android.hipster.githubclient.components.ComponentsBuilder;
+import android.hipster.githubclient.net.models.AccessTokenResponse;
+import android.hipster.githubclient.net.requests.AuthTokenRequest;
+import android.hipster.githubclient.util.Consts;
 import android.hipster.githubclient.util.PermissionHelper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,7 +41,13 @@ import java.util.List;
 
 import android.hipster.githubclient.R;
 
+import com.octo.android.robospice.SpiceManager;
+import com.octo.android.robospice.persistence.DurationInMillis;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
+
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EditorAction;
@@ -52,10 +62,19 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 @EActivity(R.layout.activity_login)
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements RequestListener<AccessTokenResponse> {
 
     @Inject
     PermissionHelper mHelper;
+
+    @Inject
+    SpiceManager mSpiceManager;
+
+    @Inject
+    AuthManager mAuthManager;
+
+    @Bean
+    AuthTokenRequest mAuthTokenRequest;
 
     @ViewById(R.id.email)
     AutoCompleteTextView mEmailView;
@@ -90,8 +109,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @AfterViews
     void syncViews() {
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-
         /*if(mHelper.mayRequestContacts(this)) {
             requestPermissions(PermissionHelper.REQUEST_READ_CONTACTS);
         }*/
@@ -117,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
+        /*if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
@@ -125,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
-        }
+        }*/
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -136,6 +153,10 @@ public class LoginActivity extends AppCompatActivity {
             // perform the user login attempt.
             showProgress(true);
         }
+
+        mAuthTokenRequest.setUserName(mEmailView.getText().toString());
+        mAuthTokenRequest.setPassword(mPasswordView.getText().toString());
+        mSpiceManager.execute(mAuthTokenRequest, Consts.AUTH_TOKEN_CACHE_KEY, DurationInMillis.ALWAYS_RETURNED, this);
     }
 
     private boolean isEmailValid(String email) {
@@ -184,5 +205,39 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    protected void onStop() {
+        if(mSpiceManager.isStarted()) {
+            mSpiceManager.shouldStop();
+        }
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        if(!mSpiceManager.isStarted()) {
+            mSpiceManager.start(this);
+        }
+        super.onStart();
+    }
+
+    @Override
+    public void onRequestFailure(SpiceException spiceException) {
+        Snackbar.make(mEmailView, R.string.application_authorization_error, Snackbar.LENGTH_INDEFINITE)
+                .setAction(android.R.string.ok, new View.OnClickListener() {
+                    @Override
+                    @TargetApi(Build.VERSION_CODES.M)
+                    public void onClick(View v) {
+                    }
+                });
+    }
+
+    @Override
+    public void onRequestSuccess(AccessTokenResponse accessTokenResponse) {
+        mAuthManager.authorizeApplication(accessTokenResponse.getToken());
+
+        finish();
+    }
 }
 
