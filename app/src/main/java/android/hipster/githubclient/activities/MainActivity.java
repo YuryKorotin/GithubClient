@@ -1,6 +1,8 @@
 package android.hipster.githubclient.activities;
 
+import android.hipster.githubclient.AuthManager;
 import android.hipster.githubclient.R;
+import android.hipster.githubclient.components.ComponentsBuilder;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,10 +24,17 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
+import javax.inject.Inject;
+
 @OptionsMenu(R.menu.main)
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final int LOGIN_REQUEST_CODE = 100;
+
+    @Inject
+    AuthManager mAuthManager;
 
     @ViewById(R.id.toolbar)
     Toolbar mToolbar;
@@ -45,8 +54,24 @@ public class MainActivity extends AppCompatActivity
                 .setAction("Action", null).show();
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ComponentsBuilder.getApplicationComponent(this).inject(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if(!mAuthManager.isAppAuthorized()) {
+            LoginActivity_.intent(this).startForResult(LOGIN_REQUEST_CODE);
+        }
+    }
+
     @AfterViews
-    void addViews() {
+    void syncViews() {
         setSupportActionBar(mToolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
