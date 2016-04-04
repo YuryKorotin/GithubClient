@@ -218,13 +218,8 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
 
     @Override
     public void onRequestFailure(SpiceException spiceException) {
-        Snackbar.make(mEmailView, R.string.application_authorization_error, Snackbar.LENGTH_INDEFINITE)
-                .setAction(android.R.string.ok, new View.OnClickListener() {
-                    @Override
-                    @TargetApi(Build.VERSION_CODES.M)
-                    public void onClick(View v) {
-                    }
-                });
+        Snackbar.make(mLoginFormView, spiceException.getLocalizedMessage(), Snackbar.LENGTH_LONG)
+                .setAction(getString(R.string.ok), null).show();
     }
 
     @Override

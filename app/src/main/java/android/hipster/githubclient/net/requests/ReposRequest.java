@@ -32,6 +32,8 @@ public class ReposRequest extends SpiceRequest<ReposList> {
 
     @Override
     public ReposList loadDataFromNetwork() throws Exception {
+        //TODO: Add caching to realm of repos
+
         //ReposRequestParams reposRequestParams = new ReposRequestParams();
 
         mRestClient.setBearerAuth(mPreferences.getAuthToken());

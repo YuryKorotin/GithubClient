@@ -62,12 +62,6 @@ public class MainActivity extends AppCompatActivity
     @InstanceState
     int mFragmentNumber = 0;
 
-    @Click(R.id.fab)
-    void onActionButtonClick() {
-        Snackbar.make(mDrawer, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,12 +126,6 @@ public class MainActivity extends AppCompatActivity
             mainFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
 
             mPreferences.setCurrentFragment(mFragmentNumber);
-        } else if (id == R.id.nav_slideshow) {
-            mDrawer.closeDrawer(GravityCompat.START);
-            return true;
-        } else if (id == R.id.nav_manage) {
-            mDrawer.closeDrawer(GravityCompat.START);
-            return true;
         }
 
         mDrawer.closeDrawer(GravityCompat.START);

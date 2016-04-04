@@ -21,4 +21,7 @@
     </string>
     <string name="application_authorization_error">Application authorization error has occured</string>
     <string name="repos">Repositories</string>
+    <string name="incorrect_login_or_password">Incorrect login or password</string>
+    <string name="ok">ok</string>
+    <string name="during_load_repos_error_has_occured">During load repos error has occured</string>
 </resources>

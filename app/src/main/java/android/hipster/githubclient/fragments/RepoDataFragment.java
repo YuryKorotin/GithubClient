@@ -10,6 +10,7 @@ import android.hipster.githubclient.net.requests.AuthTokenRequest;
 import android.hipster.githubclient.net.requests.ReposRequest;
 import android.hipster.githubclient.util.Consts;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -103,7 +104,8 @@ public class RepoDataFragment extends Fragment implements RequestListener<ReposL
 
     @Override
     public void onRequestFailure(SpiceException spiceException) {
-        //Show toast
+        Snackbar.make(mRootView, spiceException.getLocalizedMessage(), Snackbar.LENGTH_LONG)
+                .setAction(getString(R.string.ok), null).show();
     }
 
     @Override

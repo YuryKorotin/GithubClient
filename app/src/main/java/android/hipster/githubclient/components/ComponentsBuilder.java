@@ -12,6 +12,8 @@ import android.util.Log;
  * Created by yurykorotin on 01/04/16.
  */
 public class ComponentsBuilder {
+    //TODO: Remove boilerplate code
+
     private static ApplicationComponent sApplicationComponent;
     private static LoginActivityComponent sLoginActivityComponent;
     private static RepoDataFragmentComponent sRepoDataFragmentComponent;
