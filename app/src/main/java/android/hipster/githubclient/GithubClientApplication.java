@@ -24,7 +24,7 @@ public class GithubClientApplication extends Application{
     }
 
     protected void configureDagger() {
-        mApplicationComponent = ComponentsBuilder.getApplicationComponent(this);
+        mApplicationComponent = ComponentsBuilder.getApplicationComponent();
         mApplicationComponent.inject(this);
     }
 

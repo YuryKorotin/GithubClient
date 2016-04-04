@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
     @Inject
     AuthManager mAuthManager;
 
-    @Bean
+    @Inject
     AuthTokenRequest mAuthTokenRequest;
 
     @ViewById(R.id.email)
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ComponentsBuilder.getLoginActivityComponent(this).inject(this);
+        ComponentsBuilder.getLoginActivityComponent().inject(this);
     }
 
     @EditorAction(R.id.password)

@@ -3,23 +3,27 @@ package android.hipster.githubclient.activities;
 import android.hipster.githubclient.AuthManager;
 import android.hipster.githubclient.R;
 import android.hipster.githubclient.components.ComponentsBuilder;
+import android.hipster.githubclient.fragments.RepoDataFragment;
+import android.hipster.githubclient.fragments.RepoDataFragment_;
+import android.hipster.githubclient.net.models.RepoData;
+import android.hipster.githubclient.util.Preferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
@@ -29,12 +33,17 @@ import javax.inject.Inject;
 @OptionsMenu(R.menu.main)
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RepoDataFragment.OnListFragmentInteractionListener {
 
     private static final int LOGIN_REQUEST_CODE = 100;
+    private static final String CURRENT_FRAGMENT_TAG = "current_fragment_tag";
+    private static final int REPOS_FRAGMENT_NUMBER = 0;
 
     @Inject
     AuthManager mAuthManager;
+
+    @Inject
+    Preferences mPreferences;
 
     @ViewById(R.id.toolbar)
     Toolbar mToolbar;
@@ -48,6 +57,11 @@ public class MainActivity extends AppCompatActivity
     @ViewById(R.id.main_content)
     ViewGroup mMainContentView;
 
+    Fragment currentFragment;
+
+    @InstanceState
+    int mFragmentNumber = 0;
+
     @Click(R.id.fab)
     void onActionButtonClick() {
         Snackbar.make(mDrawer, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -58,7 +72,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ComponentsBuilder.getApplicationComponent(this).inject(this);
+        ComponentsBuilder.getApplicationComponent().inject(this);
+
+        mFragmentNumber = mPreferences.getCurrentFragment();
     }
 
     @Override
@@ -80,6 +96,12 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         mNavigationView.setNavigationItemSelectedListener(this);
+
+        if(mFragmentNumber == REPOS_FRAGMENT_NUMBER) {
+            currentFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
+        }
+
+        changeFrament(currentFragment);
     }
 
     @Override
@@ -102,21 +124,45 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        Fragment mainFragment = null;
 
+        if (id == R.id.nav_repos) {
+            mFragmentNumber = REPOS_FRAGMENT_NUMBER;
+
+            mainFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
+
+            mPreferences.setCurrentFragment(mFragmentNumber);
         } else if (id == R.id.nav_slideshow) {
-
+            mDrawer.closeDrawer(GravityCompat.START);
+            return true;
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            mDrawer.closeDrawer(GravityCompat.START);
+            return true;
         }
 
         mDrawer.closeDrawer(GravityCompat.START);
+
+        changeFrament(mainFragment);
+
         return true;
+    }
+
+    private void changeFrament(Fragment mainFragment) {
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        //ft.setCustomAnimations(R.transition.slide_and_change_bounds, R.anim.window_exit, 0, R.anim.window_exit);
+        if (currentFragment != null) {
+            ft.remove(currentFragment);
+        }
+        ft.add(R.id.main_content, mainFragment, CURRENT_FRAGMENT_TAG);
+
+        ft.addToBackStack(null);
+
+        ft.commit();
+    }
+
+    @Override
+    public void onListFragmentInteraction(RepoData item) {
+
     }
 }

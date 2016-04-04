@@ -1,10 +1,16 @@
 package android.hipster.githubclient.util;
 
+import android.hipster.githubclient.net.models.ReposList;
+
+import com.octo.android.robospice.request.listener.RequestListener;
+
 /**
  * Created by yurykorotin on 02/04/16.
  */
 public class Consts {
     public final static String AUTH_TOKEN_CACHE_KEY = "auth token";
+
+    public static final String REPOS_CACHE_KEY = "repos";
 
     public final static String CLIENT_ID = "18f8e72079c2a9b52be9";
 

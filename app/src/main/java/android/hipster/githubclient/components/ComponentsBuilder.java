@@ -5,6 +5,7 @@ import android.hipster.githubclient.GithubClientApplication;
 import android.hipster.githubclient.activities.LoginActivity;
 import android.hipster.githubclient.modules.AppModule;
 import android.hipster.githubclient.modules.LoginActivityModule;
+import android.hipster.githubclient.modules.RepoDataFragmentModule;
 import android.util.Log;
 
 /**
@@ -13,18 +14,38 @@ import android.util.Log;
 public class ComponentsBuilder {
     private static ApplicationComponent sApplicationComponent;
     private static LoginActivityComponent sLoginActivityComponent;
+    private static RepoDataFragmentComponent sRepoDataFragmentComponent;
+    private static AppModule sAppModule;
 
-    public static ApplicationComponent getApplicationComponent(Context context) {
+    public static ApplicationComponent getApplicationComponent() {
+        if(sAppModule == null) {
+            sAppModule = new AppModule();
+        }
         if(sApplicationComponent == null) {
-            sApplicationComponent = DaggerApplicationComponent.builder().appModule(new AppModule()).build();
+            sApplicationComponent = DaggerApplicationComponent.builder().appModule(sAppModule).build();
         }
         return sApplicationComponent;
     }
 
-    public static LoginActivityComponent getLoginActivityComponent(Context context) {
+    public static LoginActivityComponent getLoginActivityComponent() {
+        if(sAppModule == null) {
+            sAppModule = new AppModule();
+        }
         if(sLoginActivityComponent == null) {
-            sLoginActivityComponent = DaggerLoginActivityComponent.builder().loginActivityModule(new LoginActivityModule()).appModule(new AppModule()).build();
+            sLoginActivityComponent = DaggerLoginActivityComponent.builder().loginActivityModule(new LoginActivityModule())
+                                                                            .appModule(sAppModule).build();
         }
         return sLoginActivityComponent;
+    }
+
+    public static RepoDataFragmentComponent getReposDataFragmentComponent() {
+        if(sAppModule == null) {
+            sAppModule = new AppModule();
+        }
+        if(sRepoDataFragmentComponent == null) {
+            sRepoDataFragmentComponent = DaggerRepoDataFragmentComponent.builder().repoDataFragmentModule(new RepoDataFragmentModule())
+                                                                                  .appModule(sAppModule).build();
+        }
+        return sRepoDataFragmentComponent;
     }
 }

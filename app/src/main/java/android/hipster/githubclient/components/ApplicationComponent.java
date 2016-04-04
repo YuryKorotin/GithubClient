@@ -4,7 +4,9 @@ import android.hipster.githubclient.AuthManager;
 import android.hipster.githubclient.GithubClientApplication;
 import android.hipster.githubclient.activities.LoginActivity;
 import android.hipster.githubclient.activities.MainActivity;
+import android.hipster.githubclient.fragments.RepoDataFragment;
 import android.hipster.githubclient.modules.AppModule;
+import android.hipster.githubclient.net.models.RepoData;
 import android.hipster.githubclient.util.Preferences;
 
 import javax.inject.Singleton;

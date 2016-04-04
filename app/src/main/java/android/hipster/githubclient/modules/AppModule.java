@@ -3,7 +3,10 @@ package android.hipster.githubclient.modules;
 import android.content.Context;
 import android.hipster.githubclient.GithubClientApplication;
 import android.hipster.githubclient.net.GithubApiClient;
+import android.hipster.githubclient.net.GithubApiClient_;
 import android.hipster.githubclient.net.requests.AuthTokenRequest;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -30,5 +33,12 @@ public class AppModule {
     @Provides
     public Context provideContext() {
         return mContext;
+    }
+
+
+    @Provides
+    @Singleton
+    public GithubApiClient provideGithubApiClient(Context context) {
+        return new GithubApiClient_(context);
     }
 }

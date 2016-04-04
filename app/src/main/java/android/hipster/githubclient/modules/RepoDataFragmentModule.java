@@ -4,7 +4,10 @@ import android.content.Context;
 import android.hipster.githubclient.net.GithubApiClient;
 import android.hipster.githubclient.net.GithubApiClient_;
 import android.hipster.githubclient.net.requests.AuthTokenRequest;
+import android.hipster.githubclient.net.requests.ReposRequest;
 import android.hipster.githubclient.services.AuthSpiceService;
+import android.hipster.githubclient.services.ReposSpiceService;
+import android.hipster.githubclient.util.Preferences;
 
 import com.octo.android.robospice.SpiceManager;
 
@@ -18,10 +21,10 @@ import dagger.Provides;
  */
 @Module(includes = AppModule.class)
 @Singleton
-public class LoginActivityModule {
+public class RepoDataFragmentModule {
     @Provides
     @Singleton
     public SpiceManager provideSpiceManager() {
-        return new SpiceManager(AuthSpiceService.class);
+        return new SpiceManager(ReposSpiceService.class);
     }
 }
