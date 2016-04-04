@@ -103,7 +103,6 @@ public class RepoDataFragment extends Fragment implements RequestListener<ReposL
 
     @Override
     public void onRequestFailure(SpiceException spiceException) {
-        int i = 0;
         //Show toast
     }
 
@@ -134,5 +133,21 @@ public class RepoDataFragment extends Fragment implements RequestListener<ReposL
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(RepoData item);
+    }
+
+    @Override
+    public void onStop() {
+        if(mSpiceManager.isStarted()) {
+            mSpiceManager.shouldStop();
+        }
+        super.onStop();
+    }
+
+    @Override
+    public void onStart() {
+        if(!mSpiceManager.isStarted()) {
+            mSpiceManager.start(getActivity());
+        }
+        super.onStart();
     }
 }

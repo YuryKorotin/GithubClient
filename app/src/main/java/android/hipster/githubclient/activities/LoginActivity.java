@@ -119,14 +119,12 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
@@ -134,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
         }
 
         // Check for a valid email address.
-        /*if (TextUtils.isEmpty(email)) {
+        if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
@@ -142,20 +140,16 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
-        }*/
+        }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
             showProgress(true);
         }
 
-        mAuthTokenRequest.setUserName(mEmailView.getText().toString());
-        mAuthTokenRequest.setPassword(mPasswordView.getText().toString());
+        mAuthTokenRequest.setUserName(email);
+        mAuthTokenRequest.setPassword(password);
         mSpiceManager.execute(mAuthTokenRequest, Consts.AUTH_TOKEN_CACHE_KEY, DurationInMillis.ALWAYS_RETURNED, this);
     }
 

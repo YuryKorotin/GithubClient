@@ -30,6 +30,8 @@
         </activity>
 
         <service android:name=".services.AuthSpiceService" android:exported="false" />
+
+        <service android:name=".services.ReposSpiceService" android:exported="false" />
     </application>
 
 </manifest>
