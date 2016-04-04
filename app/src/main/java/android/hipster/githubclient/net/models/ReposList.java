@@ -1,28 +1,15 @@
 package android.hipster.githubclient.net.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 
 /**
  * Created by yurykorotin on 03/04/16.
  */
-public class ReposList {
-    private static final long serialVersionUID = 6836514467436078182L;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ReposList extends ArrayList<RepoData>{
+    public ReposList() {
 
-    public ArrayList<RepoData> getRepos() {
-        return repos;
-    }
-
-    public void setRepos(ArrayList<RepoData> repos) {
-        this.repos = repos;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    private ArrayList<RepoData> repos;
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
     }
 }

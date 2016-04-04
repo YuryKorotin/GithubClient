@@ -116,7 +116,7 @@ public class RepoDataFragment extends Fragment implements RequestListener<ReposL
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new RepoItemRecyclerViewAdapter(reposList.getRepos(), mListener));
+            recyclerView.setAdapter(new RepoItemRecyclerViewAdapter(reposList, mListener));
         }
     }
 

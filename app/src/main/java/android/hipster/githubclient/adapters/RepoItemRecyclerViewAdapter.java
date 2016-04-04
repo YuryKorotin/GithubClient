@@ -31,7 +31,7 @@ public class RepoItemRecyclerViewAdapter extends RecyclerView.Adapter<RepoItemRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText((int)mValues.get(position).getId());
+        holder.mIdView.setText(String.valueOf(mValues.get(position).getId()));
         holder.mContentView.setText(mValues.get(position).getFullName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
