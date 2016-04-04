@@ -151,6 +151,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(RepoData item) {
-
+        RepoDetailActivity_.intent(this).mRepoData(item).start();
     }
 }
