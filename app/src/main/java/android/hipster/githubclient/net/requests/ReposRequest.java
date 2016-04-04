@@ -34,7 +34,7 @@ public class ReposRequest extends SpiceRequest<ReposList> {
     public ReposList loadDataFromNetwork() throws Exception {
         //ReposRequestParams reposRequestParams = new ReposRequestParams();
 
-        mRestClient.setHttpBasicAuth("dreadnoughtfull@yandex.ru", mPreferences.getAuthToken());
+        mRestClient.setBearerAuth(mPreferences.getAuthToken());
 
         ReposList response = mRestClient.getUserRepos();
 
