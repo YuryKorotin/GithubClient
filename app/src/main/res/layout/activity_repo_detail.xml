@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="380dp"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/colorPrimary">
+                app:cardBackgroundColor="@android:color/white">
 
                 <RelativeLayout
                     android:id="@+id/repo_info_layout"
@@ -40,14 +40,13 @@
                         android:layout_centerHorizontal="true"
                         android:maxLines="3"
                         android:padding="8dp"
-                        android:textColor="@android:color/white"
                         android:textSize="22dp"
                         android:textStyle="bold"/>
 
                     <ImageView
                         android:id="@+id/avatar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="150dp"
+                        android:layout_width="128dp"
+                        android:layout_height="128dp"
                         android:layout_alignParentRight="true"
                         android:layout_below="@id/name"
                         android:layout_margin="16dp"
@@ -62,26 +61,27 @@
                         android:maxLines="3"
                         android:padding="8dp"
                         android:layout_marginRight="16dp"
-                        android:textColor="@android:color/white"
-                        android:textSize="22dp"
+                        android:textSize="16dp"
                         android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/name"
+                        android:layout_below="@id/user_name"
                         android:layout_toLeftOf="@id/avatar"
+                        android:text="@string/here_should_be_text_of_description"
                         android:maxLines="3"
                         android:padding="8dp"
                         android:textColor="#666"
-                        android:textSize="14dp"/>
+                        android:textSize="12dp"/>
 
                     <LinearLayout
                         android:id="@+id/repo_indicator_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/description"
+                        android:layout_toLeftOf="@id/avatar"
+                        android:layout_below="@id/name"
                         android:orientation="vertical">
 
                         <RelativeLayout
@@ -112,12 +112,12 @@
                                 android:layout_centerVertical="true"
                                 android:layout_toRightOf="@+id/forks_icon"
                                 android:text="@string/forks"
-                                android:textColor="@android:color/white"
                                 android:textSize="18sp"/>
                         </RelativeLayout>
 
 
                         <RelativeLayout
+                            android:layout_marginTop="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -143,7 +143,6 @@
                                 android:layout_margin="8dp"
                                 android:layout_toRightOf="@+id/watches_icon"
                                 android:text="@string/watches"
-                                android:textColor="@android:color/white"
                                 android:textSize="18sp"/>
 
                         </RelativeLayout>

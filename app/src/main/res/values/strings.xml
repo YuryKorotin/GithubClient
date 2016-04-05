@@ -26,4 +26,5 @@
     <string name="during_load_repos_error_has_occured">During load repos error has occured</string>
     <string name="forks">forks</string>
     <string name="watches">watches</string>
+    <string name="here_should_be_text_of_description">Text of description should be here</string>
 </resources>
