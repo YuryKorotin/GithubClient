@@ -10,6 +10,7 @@ import com.octo.android.robospice.request.SpiceRequest;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,6 +22,7 @@ import javax.inject.Singleton;
 @Singleton
 public class AuthTokenRequest extends SpiceRequest<AccessTokenResponse> {
 
+    private static final int RANDOM_MAX_LENGTH = 5;
     private GithubApiClient mRestClient;
 
     public void setUserName(String userName) {
@@ -45,16 +47,31 @@ public class AuthTokenRequest extends SpiceRequest<AccessTokenResponse> {
     public AccessTokenResponse loadDataFromNetwork() throws Exception {
         List<String> scopes = Arrays.asList(Consts.API_SCOPES);
 
+        String fingerPrint = mPassword + random();
+
         TokenRequestParams params = new TokenRequestParams(Consts.CLIENT_ID,
                                                            Consts.CLIENT_SECRET,
                                                            Consts.API_NOTE,
-                                                           mPassword,
+                                                           fingerPrint,
                                                            scopes);
 
         mRestClient.setHttpBasicAuth(mUserName, mPassword);
 
-        AccessTokenResponse response = mRestClient.getAccessToken(params);
+        AccessTokenResponse response = mRestClient.updateAccessToken(Consts.CLIENT_ID, params);
 
         return response;
     }
+
+    public static String random() {
+        Random generator = new Random();
+        StringBuilder randomStringBuilder = new StringBuilder();
+        int randomLength = generator.nextInt(RANDOM_MAX_LENGTH);
+        char tempChar;
+        for (int i = 0; i < randomLength; i++){
+            tempChar = (char) (generator.nextInt(96) + 32);
+            randomStringBuilder.append(tempChar);
+        }
+        return randomStringBuilder.toString();
+    }
+
 }

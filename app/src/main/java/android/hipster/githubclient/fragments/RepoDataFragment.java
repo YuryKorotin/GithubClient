@@ -51,6 +51,10 @@ public class RepoDataFragment extends Fragment implements RequestListener<ReposL
     @Inject
     ReposRequest mReposRequest;
 
+    @Inject
+    AuthManager mAuthManager;
+
+
     @FragmentArg(ARG_COLUMN_COUNT)
     int mColumnCount = 2;
 
@@ -77,12 +81,18 @@ public class RepoDataFragment extends Fragment implements RequestListener<ReposL
 
     @AfterViews
     void syncViews() {
-        mSpiceManager.execute(mReposRequest, Consts.REPOS_CACHE_KEY, DurationInMillis.ALWAYS_RETURNED, this);
+        if(mAuthManager.isAppAuthorized()) {
+            mSpiceManager.execute(mReposRequest, Consts.REPOS_CACHE_KEY, DurationInMillis.ALWAYS_RETURNED, this);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        if(mAuthManager.isAppAuthorized()) {
+            mSpiceManager.execute(mReposRequest, Consts.REPOS_CACHE_KEY, DurationInMillis.ALWAYS_RETURNED, this);
+        }
     }
 
     @Override

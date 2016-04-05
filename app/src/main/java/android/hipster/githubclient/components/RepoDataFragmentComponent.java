@@ -1,5 +1,6 @@
 package android.hipster.githubclient.components;
 
+import android.hipster.githubclient.AuthManager;
 import android.hipster.githubclient.activities.LoginActivity;
 import android.hipster.githubclient.fragments.RepoDataFragment;
 import android.hipster.githubclient.modules.LoginActivityModule;
@@ -17,4 +18,6 @@ import dagger.Component;
 @Singleton
 public interface RepoDataFragmentComponent {
     void inject(RepoDataFragment fragment);
+
+    AuthManager authManager();
 }

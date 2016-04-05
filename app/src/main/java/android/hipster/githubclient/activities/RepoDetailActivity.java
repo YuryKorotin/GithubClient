@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.akashandroid90.imageletter.MaterialLetterIcon;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -36,8 +37,17 @@ public class RepoDetailActivity extends AppCompatActivity {
     @ViewById(R.id.name)
     TextView mNameTextView;
 
+    @ViewById(R.id.user_name)
+    TextView mUserNameTextView;
+
     @ViewById(R.id.description)
     TextView mDescriptionTextView;
+
+    @ViewById(R.id.forks_icon)
+    MaterialLetterIcon mForksIcon;
+
+    @ViewById(R.id.watches_icon)
+    MaterialLetterIcon mWatchesIcon;
 
     @Inject
     ImageLoader mImageLoader;
@@ -48,10 +58,19 @@ public class RepoDetailActivity extends AppCompatActivity {
     @AfterViews
     void syncViews() {
         getSupportActionBar().setTitle(mRepoData.getFullName());
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        mForksIcon.setLetter(String.valueOf(mRepoData.getForksCount()));
+        mWatchesIcon.setLetter(String.valueOf(mRepoData.getWatchersCount()));
+
+        mDescriptionTextView.setText(mRepoData.getDescription());
+        mNameTextView.setText(mRepoData.getName());
+
+        mUserNameTextView.setText(mRepoData.getOwner().getLogin());
+
+        //TODO: Add progress bar
+        mImageLoader.displayImage(mRepoData.getOwner().getAvatarUrl(), mAvatarImageView);
     }
 
     @OptionsItem(android.R.id.home)

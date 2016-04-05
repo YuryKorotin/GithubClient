@@ -74,13 +74,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onStart() {
         super.onStart();
-
-        if(!mAuthManager.isAppAuthorized()) {
-            LoginActivity_.intent(this).startForResult(LOGIN_REQUEST_CODE);
-        }
     }
 
     //TODO: Add adapter for navigation and render of user data to navigation drawer
+    //TODO: ADd material icon library https://github.com/code-mc/material-icon-lib
 
     @AfterViews
     void syncViews() {
@@ -145,8 +142,6 @@ public class MainActivity extends AppCompatActivity
             ft.remove(currentFragment);
         }
         ft.add(R.id.main_content, mainFragment, CURRENT_FRAGMENT_TAG);
-
-        ft.addToBackStack(null);
 
         ft.commit();
     }

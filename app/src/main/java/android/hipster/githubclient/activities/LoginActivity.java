@@ -99,6 +99,12 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
         super.onCreate(savedInstanceState);
 
         ComponentsBuilder.getLoginActivityComponent().inject(this);
+
+        if(mAuthManager.isAppAuthorized()) {
+            finish();
+
+            MainActivity_.intent(this).start();
+        }
     }
 
     @EditorAction(R.id.password)
@@ -228,6 +234,8 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
         mAuthManager.authorizeApplication(accessTokenResponse.getToken());
 
         finish();
+
+        MainActivity_.intent(this).start();
     }
 }
 

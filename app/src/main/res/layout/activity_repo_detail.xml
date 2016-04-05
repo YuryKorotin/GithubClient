@@ -1,59 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="android.hipster.githubclient.activities.RepoDetailActivity">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
+    <ScrollView
         android:layout_width="match_parent"
-        app:cardBackgroundColor="@color/colorPrimary"
-        android:layout_height="380dp"
-        android:layout_margin="8dp">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
-                android:layout_margin="16dp"
-                android:layout_alignParentRight="true"
-                android:scaleType="centerCrop"/>
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
+                android:layout_height="380dp"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/colorPrimary">
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@id/avatar"
-                android:maxLines="3"
-                android:padding="8dp"
-                android:textColor="@android:color/white"
-                android:textSize="22dp"
-                android:textStyle="bold"/>
+                <RelativeLayout
+                    android:id="@+id/repo_info_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:layout_toLeftOf="@id/avatar"
-                android:maxLines="3"
-                android:padding="8dp"
-                android:textColor="#666"
-                android:textSize="14dp"/>
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:maxLines="3"
+                        android:padding="8dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="22dp"
+                        android:textStyle="bold"/>
 
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/name"
+                        android:layout_margin="16dp"
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/avatar"
+                        android:maxLines="3"
+                        android:padding="8dp"
+                        android:layout_marginRight="16dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="22dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/name"
+                        android:layout_toLeftOf="@id/avatar"
+                        android:maxLines="3"
+                        android:padding="8dp"
+                        android:textColor="#666"
+                        android:textSize="14dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/repo_indicator_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/description"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.github.akashandroid90.imageletter.MaterialLetterIcon
+                                xmlns:image="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/forks_icon"
+                                android:layout_width="@dimen/letter_icon_size"
+                                android:layout_height="@dimen/letter_icon_size"
+                                android:layout_alignParentLeft="true"
+                                android:layout_margin="8dp"
+                                image:border_color="@android:color/black"
+                                image:border_width="1dp"
+                                image:initials="false"
+                                image:initials_number="9"
+                                image:is_oval="true"
+                                image:letter_color="@android:color/white"
+                                image:letters_number="3"
+                                image:shape_color="@android:color/holo_green_dark"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@id/forks_icon"
+                                android:layout_margin="8dp"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/forks_icon"
+                                android:text="@string/forks"
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"/>
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.github.akashandroid90.imageletter.MaterialLetterIcon
+                                xmlns:image="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/watches_icon"
+                                android:layout_width="@dimen/letter_icon_size"
+                                android:layout_height="@dimen/letter_icon_size"
+                                android:layout_margin="8dp"
+                                image:border_color="@android:color/black"
+                                image:border_width="1dp"
+                                image:initials="false"
+                                image:initials_number="9"
+                                image:is_oval="true"
+                                image:letter_color="@android:color/white"
+                                image:letters_number="3"
+                                image:shape_color="@color/colorAccent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="8dp"
+                                android:layout_toRightOf="@+id/watches_icon"
+                                android:text="@string/watches"
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"/>
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

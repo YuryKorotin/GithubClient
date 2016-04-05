@@ -9,4 +9,7 @@
     <dimen name="text_margin">16dp</dimen>
 
     <integer name="anim_duration_long">500</integer>
+
+    <dimen name="letter_icon_size">48dp</dimen>
+
 </resources>
