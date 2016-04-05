@@ -14,10 +14,29 @@ public class RepoData implements Serializable {
     private String mUrl;
     private String mName;
     private String mFullName;
+    private String mDescription;
     private long mForksCount;
     private long mWatchersCount;
     private long mStarGazersCount;
+    private OwnerData mOwner;
 
+    @JsonProperty("description")
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    @JsonProperty("owner")
+    public OwnerData getOwner() {
+        return mOwner;
+    }
+
+    public void setOwner(OwnerData owner) {
+        mOwner = owner;
+    }
     @JsonProperty("id")
     public long getId() {
         return mId;

@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //TODO: Add adapter for navigation and render of user data to navigation drawer
+
     @AfterViews
     void syncViews() {
         setSupportActionBar(mToolbar);

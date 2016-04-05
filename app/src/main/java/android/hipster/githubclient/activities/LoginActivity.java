@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
     @ViewById(R.id.email)
     AutoCompleteTextView mEmailView;
 
+    //TODO: ADd in.anshul.libray.PasswordEditText
     @ViewById(R.id.password)
     EditText mPasswordView;
 

@@ -5,6 +5,8 @@ import android.hipster.githubclient.components.ComponentsBuilder;
 import android.hipster.githubclient.net.models.RepoData;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -14,6 +16,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.ViewById;
 
 import javax.inject.Inject;
 
@@ -26,6 +29,15 @@ public class RepoDetailActivity extends AppCompatActivity {
 
     @Extra(REPO_DATA)
     RepoData mRepoData;
+
+    @ViewById(R.id.avatar)
+    ImageView mAvatarImageView;
+
+    @ViewById(R.id.name)
+    TextView mNameTextView;
+
+    @ViewById(R.id.description)
+    TextView mDescriptionTextView;
 
     @Inject
     ImageLoader mImageLoader;
