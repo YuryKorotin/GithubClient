@@ -1,15 +1,21 @@
 package android.hipster.githubclient.activities;
 
 import android.hipster.githubclient.R;
+import android.hipster.githubclient.components.ComponentsBuilder;
 import android.hipster.githubclient.net.models.RepoData;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OptionsItem;
+
+import javax.inject.Inject;
 
 @EActivity(R.layout.activity_repo_detail)
 public class RepoDetailActivity extends AppCompatActivity {
@@ -20,6 +26,12 @@ public class RepoDetailActivity extends AppCompatActivity {
 
     @Extra(REPO_DATA)
     RepoData mRepoData;
+
+    @Inject
+    ImageLoader mImageLoader;
+
+    @Inject
+    DisplayImageOptions mDisplayImageOptions;
 
     @AfterViews
     void syncViews() {
@@ -33,5 +45,12 @@ public class RepoDetailActivity extends AppCompatActivity {
     @OptionsItem(android.R.id.home)
     void onBack() {
         onBackPressed();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ComponentsBuilder.getApplicationComponent().inject(this);
     }
 }

@@ -4,6 +4,7 @@ import android.hipster.githubclient.AuthManager;
 import android.hipster.githubclient.GithubClientApplication;
 import android.hipster.githubclient.activities.LoginActivity;
 import android.hipster.githubclient.activities.MainActivity;
+import android.hipster.githubclient.activities.RepoDetailActivity;
 import android.hipster.githubclient.fragments.RepoDataFragment;
 import android.hipster.githubclient.modules.AppModule;
 import android.hipster.githubclient.net.models.RepoData;
@@ -21,6 +22,7 @@ import dagger.Component;
 public interface ApplicationComponent {
     void inject(GithubClientApplication application);
     void inject(MainActivity mainActivity);
+    void inject(RepoDetailActivity repoDetailActivity);
 
     Preferences preferences();
     AuthManager authManager();
