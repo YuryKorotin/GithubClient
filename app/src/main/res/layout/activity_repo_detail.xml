@@ -11,147 +11,152 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="android.hipster.githubclient.activities.RepoDetailActivity">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/main_content_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/main_content_layout"
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="8dp"
+            app:cardBackgroundColor="@android:color/white">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view"
+            <RelativeLayout
+                android:id="@+id/repo_info_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:id="@+id/repo_info_layout"
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textSize="22dp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/name"
+                    android:layout_margin="16dp"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/avatar"
+                    android:layout_marginRight="16dp"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_name"
+                    android:layout_margin="8dp"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:text="@string/here_should_be_text_of_description"
+                    android:textColor="#666"
+                    android:textSize="12dp"/>
+
+                <LinearLayout
+                    android:id="@+id/repo_indicator_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name"
+                    android:layout_toLeftOf="@id/avatar"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:maxLines="3"
-                        android:padding="8dp"
-                        android:textSize="22dp"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:id="@+id/avatar"
-                        android:layout_width="128dp"
-                        android:layout_height="128dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@id/name"
-                        android:layout_margin="16dp"
-                        android:scaleType="centerCrop"/>
-
-                    <TextView
-                        android:id="@+id/user_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@id/avatar"
-                        android:layout_marginRight="16dp"
-                        android:maxLines="3"
-                        android:padding="8dp"
-                        android:textSize="16dp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/user_name"
-                        android:maxLines="3"
-                        android:layout_margin="8dp"
-                        android:padding="8dp"
-                        android:text="@string/here_should_be_text_of_description"
-                        android:textColor="#666"
-                        android:textSize="12dp"/>
-
-                    <LinearLayout
-                        android:id="@+id/repo_indicator_layout"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/name"
-                        android:layout_toLeftOf="@id/avatar"
-                        android:orientation="vertical">
+                        android:layout_marginTop="8dp">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <com.github.akashandroid90.imageletter.MaterialLetterIcon
+                            xmlns:image="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/forks_icon"
+                            android:layout_width="@dimen/letter_icon_size"
+                            android:layout_height="@dimen/letter_icon_size"
+                            android:layout_alignParentLeft="true"
+                            android:layout_margin="8dp"
+                            image:border_color="@android:color/black"
+                            image:border_width="1dp"
+                            image:initials="false"
+                            image:initials_number="9"
+                            image:is_oval="true"
+                            image:letter_color="@android:color/white"
+                            image:letters_number="3"
+                            image:shape_color="@android:color/holo_green_dark"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp">
-
-                            <com.github.akashandroid90.imageletter.MaterialLetterIcon
-                                xmlns:image="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/forks_icon"
-                                android:layout_width="@dimen/letter_icon_size"
-                                android:layout_height="@dimen/letter_icon_size"
-                                android:layout_alignParentLeft="true"
-                                android:layout_margin="8dp"
-                                image:border_color="@android:color/black"
-                                image:border_width="1dp"
-                                image:initials="false"
-                                image:initials_number="9"
-                                image:is_oval="true"
-                                image:letter_color="@android:color/white"
-                                image:letters_number="3"
-                                image:shape_color="@android:color/holo_green_dark"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignBaseline="@id/forks_icon"
-                                android:layout_centerVertical="true"
-                                android:layout_margin="8dp"
-                                android:layout_toRightOf="@+id/forks_icon"
-                                android:text="@string/forks"
-                                android:textSize="18sp"/>
-                        </RelativeLayout>
+                            android:layout_alignBaseline="@id/forks_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="8dp"
+                            android:layout_toRightOf="@+id/forks_icon"
+                            android:text="@string/forks"
+                            android:textSize="18sp"/>
+                    </RelativeLayout>
 
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                            <com.github.akashandroid90.imageletter.MaterialLetterIcon
-                                xmlns:image="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/watches_icon"
-                                android:layout_width="@dimen/letter_icon_size"
-                                android:layout_height="@dimen/letter_icon_size"
-                                android:layout_margin="8dp"
-                                image:border_color="@android:color/black"
-                                image:border_width="1dp"
-                                image:initials="false"
-                                image:initials_number="9"
-                                image:is_oval="true"
-                                image:letter_color="@android:color/white"
-                                image:letters_number="3"
-                                image:shape_color="@color/colorAccent"/>
+                        <com.github.akashandroid90.imageletter.MaterialLetterIcon
+                            xmlns:image="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/watches_icon"
+                            android:layout_width="@dimen/letter_icon_size"
+                            android:layout_height="@dimen/letter_icon_size"
+                            android:layout_margin="8dp"
+                            image:border_color="@android:color/black"
+                            image:border_width="1dp"
+                            image:initials="false"
+                            image:initials_number="9"
+                            image:is_oval="true"
+                            image:letter_color="@android:color/white"
+                            image:letters_number="3"
+                            image:shape_color="@color/colorAccent"/>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_margin="8dp"
-                                android:layout_toRightOf="@+id/watches_icon"
-                                android:text="@string/watches"
-                                android:textSize="18sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="8dp"
+                            android:layout_toRightOf="@+id/watches_icon"
+                            android:text="@string/watches"
+                            android:textSize="18sp"/>
 
-                        </RelativeLayout>
-                    </LinearLayout>
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
-    </ScrollView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/commits_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layoutManager="GridLayoutManager"
+            tools:context="android.hipster.githubclient.fragments.RepoDetailActivity_"
+            tools:listitem="@layout/fragment_commit_data"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -8,9 +8,11 @@ import com.octo.android.robospice.request.listener.RequestListener;
  * Created by yurykorotin on 02/04/16.
  */
 public class Consts {
-    public final static String AUTH_TOKEN_CACHE_KEY = "auth token";
+    public final static String AUTH_TOKEN_CACHE_KEY = "AUTH TOKEN";
 
-    public static final String REPOS_CACHE_KEY = "repos";
+    public static final String REPOS_CACHE_KEY = "REPOS";
+
+    public static final String COMMITS_CACHE_KEY = "COMMITS";
 
     public final static String CLIENT_ID = "18f8e72079c2a9b52be9";
 

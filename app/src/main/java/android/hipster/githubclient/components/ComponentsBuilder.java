@@ -6,6 +6,7 @@ import android.hipster.githubclient.activities.LoginActivity;
 import android.hipster.githubclient.modules.AppModule;
 import android.hipster.githubclient.modules.LoginActivityModule;
 import android.hipster.githubclient.modules.RepoDataFragmentModule;
+import android.hipster.githubclient.modules.RepoDetailActivityModule;
 import android.util.Log;
 
 /**
@@ -17,6 +18,7 @@ public class ComponentsBuilder {
     private static ApplicationComponent sApplicationComponent;
     private static LoginActivityComponent sLoginActivityComponent;
     private static RepoDataFragmentComponent sRepoDataFragmentComponent;
+    private static RepoDetailActivityComponent sRepoDetailActivityComponent;
     private static AppModule sAppModule;
 
     public static ApplicationComponent getApplicationComponent() {
@@ -49,5 +51,16 @@ public class ComponentsBuilder {
                                                                                   .appModule(sAppModule).build();
         }
         return sRepoDataFragmentComponent;
+    }
+
+    public static RepoDetailActivityComponent getRepoDetailActivityComponent() {
+        if(sAppModule == null) {
+            sAppModule = new AppModule();
+        }
+        if(sRepoDetailActivityComponent == null) {
+            sRepoDetailActivityComponent = DaggerRepoDetailActivityComponent.builder().repoDetailActivityModule(new RepoDetailActivityModule())
+                    .appModule(sAppModule).build();
+        }
+        return sRepoDetailActivityComponent;
     }
 }

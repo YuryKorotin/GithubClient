@@ -22,7 +22,6 @@ import dagger.Component;
 public interface ApplicationComponent {
     void inject(GithubClientApplication application);
     void inject(MainActivity mainActivity);
-    void inject(RepoDetailActivity repoDetailActivity);
 
     Preferences preferences();
     AuthManager authManager();

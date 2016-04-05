@@ -2,6 +2,7 @@ package android.hipster.githubclient.net;
 
 import android.hipster.githubclient.net.interceptors.HttpBasicAuthenticatorInterceptor;
 import android.hipster.githubclient.net.models.AccessTokenResponse;
+import android.hipster.githubclient.net.models.CommitsList;
 import android.hipster.githubclient.net.models.RepoData;
 import android.hipster.githubclient.net.models.ReposList;
 import android.hipster.githubclient.net.models.ReposRequestParams;
@@ -48,5 +49,5 @@ public interface GithubApiClient extends RestClientHeaders {
 
     @Get("/repos/{ownerId}/{repoId}/commits")
     @RequiresAuthentication
-    ReposList getUserRepos(@Path Long ownerId, @Path Long repoId);
+    CommitsList getCommits(@Path String ownerId, @Path String repoId);
 }

@@ -54,7 +54,6 @@ public class RepoDataFragment extends Fragment implements RequestListener<ReposL
     @Inject
     AuthManager mAuthManager;
 
-
     @FragmentArg(ARG_COLUMN_COUNT)
     int mColumnCount = 2;
 

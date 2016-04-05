@@ -30,7 +30,6 @@ import org.androidannotations.annotations.ViewById;
 
 import javax.inject.Inject;
 
-@OptionsMenu(R.menu.main)
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RepoDataFragment.OnListFragmentInteractionListener {
