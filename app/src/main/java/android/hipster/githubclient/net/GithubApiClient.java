@@ -45,4 +45,8 @@ public interface GithubApiClient extends RestClientHeaders {
     @Get("/user/repos")
     @RequiresAuthentication
     ReposList getUserRepos();
+
+    @Get("/repos/{ownerId}/{repoId}/commits")
+    @RequiresAuthentication
+    ReposList getUserRepos(@Path Long ownerId, @Path Long repoId);
 }
