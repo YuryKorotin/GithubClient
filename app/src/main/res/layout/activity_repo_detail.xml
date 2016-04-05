@@ -156,8 +156,6 @@
                 android:id="@+id/commits_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 app:layoutManager="GridLayoutManager"
                 tools:context="android.hipster.githubclient.fragments.RepoDetailActivity_"
                 tools:listitem="@layout/fragment_commit_data"/>

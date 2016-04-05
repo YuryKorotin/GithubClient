@@ -85,7 +85,7 @@ public class RepoDetailActivity extends AppCompatActivity implements RequestList
     @Inject
     CommitsRequest mCommitsRequest;
 
-    int mColumnCount = 2;
+    int mColumnCount = 1;
 
     @AfterViews
     void syncViews() {

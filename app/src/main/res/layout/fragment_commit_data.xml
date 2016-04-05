@@ -11,6 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/commit_item_height"
         android:layout_gravity="center"
+        android:layout_marginTop="8dp"
         android:layout_margin="8dp"
         card_view:cardCornerRadius="4dp"
         card_view:contentPadding="2dp">
@@ -35,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/text_margin"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textStyle="bold"/>
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/text_margin"
+                android:layout_margin="8dp"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textStyle="bold"/>
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/text_margin"
+                android:layout_margin="8dp"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textStyle="bold"/>
