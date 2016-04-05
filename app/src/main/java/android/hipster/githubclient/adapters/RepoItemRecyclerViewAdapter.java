@@ -37,13 +37,14 @@ public class RepoItemRecyclerViewAdapter extends RecyclerView.Adapter<RepoItemRe
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
+                if (mListener != null) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
         });
+
     }
 
     @Override

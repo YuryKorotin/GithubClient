@@ -11,5 +11,6 @@
     <integer name="anim_duration_long">500</integer>
 
     <dimen name="letter_icon_size">48dp</dimen>
+    <dimen name="commit_item_height">350dp</dimen>
 
 </resources>

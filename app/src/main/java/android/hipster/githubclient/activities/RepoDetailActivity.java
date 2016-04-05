@@ -1,6 +1,7 @@
 package android.hipster.githubclient.activities;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.hipster.githubclient.AuthManager;
 import android.hipster.githubclient.R;
 import android.hipster.githubclient.adapters.CommitItemRecyclerViewAdapter;
@@ -20,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -150,6 +152,11 @@ public class RepoDetailActivity extends AppCompatActivity implements RequestList
             mCommitList.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
         mCommitList.setAdapter(new CommitItemRecyclerViewAdapter(commitsList));
+
+        //TODO: Remove add cardview of repo detail to recycler view
+        //TODO: Delete hack
+        int viewHeight = (int) (getResources().getDimension(R.dimen.commit_item_height) * commitsList.size());
+        mCommitList.getLayoutParams().height = viewHeight;
     }
 
     public interface OnListFragmentInteractionListener {
