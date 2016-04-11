@@ -5,6 +5,7 @@ import android.hipster.githubclient.R;
 import android.hipster.githubclient.components.ComponentsBuilder;
 import android.hipster.githubclient.fragments.RepoDataFragment;
 import android.hipster.githubclient.fragments.RepoDataFragment_;
+import android.hipster.githubclient.listeners.OnBadgeChangeListener;
 import android.hipster.githubclient.net.models.RepoData;
 import android.hipster.githubclient.util.Preferences;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarBadge;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
 import org.androidannotations.annotations.AfterViews;
@@ -39,7 +41,7 @@ import javax.inject.Inject;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity
         implements RepoDataFragment.OnListFragmentInteractionListener,
-        OnMenuTabClickListener {
+        OnMenuTabClickListener{
 
     private static final int LOGIN_REQUEST_CODE = 100;
     private static final String CURRENT_FRAGMENT_TAG = "current_fragment_tag";
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity
 
         setSupportActionBar(mToolbar);
 
-        if(mFragmentNumber == REPOS_FRAGMENT_NUMBER) {
+        if (mFragmentNumber == REPOS_FRAGMENT_NUMBER) {
             currentFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
         }
 
@@ -139,12 +141,18 @@ public class MainActivity extends AppCompatActivity
     public void onMenuTabReSelected(@IdRes int menuItemId) {
         Fragment mainFragment = null;
         if (menuItemId == R.id.bottom_bar_item_repos) {
-                mFragmentNumber = REPOS_FRAGMENT_NUMBER;
+            mFragmentNumber = REPOS_FRAGMENT_NUMBER;
 
-                mainFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
+            mainFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
 
-                mPreferences.setCurrentFragment(mFragmentNumber);
+            mPreferences.setCurrentFragment(mFragmentNumber);
         }
         changeFrament(mainFragment);
+    }
+
+    public void showBadge(int badgePosition, int value) {
+        BottomBarBadge newBadge = mBottomBar.makeBadgeForTabAt(badgePosition, getColor(R.color.red_color), value);
+
+        newBadge.show();
     }
 }

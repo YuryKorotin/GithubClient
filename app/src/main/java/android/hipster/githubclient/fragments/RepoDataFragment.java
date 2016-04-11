@@ -2,8 +2,10 @@ package android.hipster.githubclient.fragments;
 
 import android.content.Context;
 import android.hipster.githubclient.AuthManager;
+import android.hipster.githubclient.activities.MainActivity;
 import android.hipster.githubclient.adapters.RepoItemRecyclerViewAdapter;
 import android.hipster.githubclient.components.ComponentsBuilder;
+import android.hipster.githubclient.listeners.OnBadgeChangeListener;
 import android.hipster.githubclient.net.models.RepoData;
 import android.hipster.githubclient.net.models.ReposList;
 import android.hipster.githubclient.net.requests.AuthTokenRequest;
@@ -23,6 +25,7 @@ import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+import com.roughike.bottombar.BottomBarBadge;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -40,7 +43,7 @@ import javax.inject.Inject;
  * interface.
  */
 @EFragment(R.layout.fragment_repodata_list)
-public class RepoDataFragment extends Fragment implements RequestListener<ReposList> {
+public class RepoDataFragment extends Fragment implements RequestListener<ReposList>, OnBadgeChangeListener  {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
@@ -128,7 +131,7 @@ public class RepoDataFragment extends Fragment implements RequestListener<ReposL
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new RepoItemRecyclerViewAdapter(reposList, mListener));
+            recyclerView.setAdapter(new RepoItemRecyclerViewAdapter(reposList, mListener, this));
         }
     }
 
@@ -161,5 +164,13 @@ public class RepoDataFragment extends Fragment implements RequestListener<ReposL
             mSpiceManager.start(getActivity());
         }
         super.onStart();
+    }
+
+    @Override
+    public void onBadgeCountChange(int badgePosition, int value) {
+        MainActivity activity = (MainActivity) getActivity();
+        if(activity != null) {
+            activity.showBadge(badgePosition, value);
+        }
     }
 }

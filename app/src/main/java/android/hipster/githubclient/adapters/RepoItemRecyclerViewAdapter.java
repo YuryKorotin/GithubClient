@@ -2,6 +2,7 @@ package android.hipster.githubclient.adapters;
 
 import android.hipster.githubclient.R;
 import android.hipster.githubclient.fragments.RepoDataFragment;
+import android.hipster.githubclient.listeners.OnBadgeChangeListener;
 import android.hipster.githubclient.net.models.RepoData;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,10 +16,12 @@ public class RepoItemRecyclerViewAdapter extends RecyclerView.Adapter<RepoItemRe
 
     private final List<RepoData> mValues;
     private final RepoDataFragment.OnListFragmentInteractionListener mListener;
+    private final OnBadgeChangeListener mOnBadgeChangeListener;
 
-    public RepoItemRecyclerViewAdapter(List<RepoData> items, RepoDataFragment.OnListFragmentInteractionListener listener) {
+    public RepoItemRecyclerViewAdapter(List<RepoData> items, RepoDataFragment.OnListFragmentInteractionListener listener, OnBadgeChangeListener onBadgeChangeListener) {
         mValues = items;
         mListener = listener;
+        mOnBadgeChangeListener = onBadgeChangeListener;
     }
 
     @Override
@@ -49,6 +52,9 @@ public class RepoItemRecyclerViewAdapter extends RecyclerView.Adapter<RepoItemRe
 
     @Override
     public int getItemCount() {
+        if(mOnBadgeChangeListener != null && mValues.size() > 0) {
+            mOnBadgeChangeListener.onBadgeCountChange(0, mValues.size());
+        }
         return mValues.size();
     }
 
