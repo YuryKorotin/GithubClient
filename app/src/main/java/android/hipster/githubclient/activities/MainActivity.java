@@ -8,17 +8,23 @@ import android.hipster.githubclient.fragments.RepoDataFragment_;
 import android.hipster.githubclient.net.models.RepoData;
 import android.hipster.githubclient.util.Preferences;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnMenuTabClickListener;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -32,7 +38,8 @@ import javax.inject.Inject;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, RepoDataFragment.OnListFragmentInteractionListener {
+        implements RepoDataFragment.OnListFragmentInteractionListener,
+        OnMenuTabClickListener {
 
     private static final int LOGIN_REQUEST_CODE = 100;
     private static final String CURRENT_FRAGMENT_TAG = "current_fragment_tag";
@@ -47,16 +54,18 @@ public class MainActivity extends AppCompatActivity
     @ViewById(R.id.toolbar)
     Toolbar mToolbar;
 
-    @ViewById(R.id.drawer_layout)
-    DrawerLayout mDrawer;
+    @ViewById(R.id.main_coordinator)
+    CoordinatorLayout mMainCoordinator;
 
-    @ViewById(R.id.nav_view)
-    NavigationView mNavigationView;
+    //@ViewById(R.id.scrolling_content)
+    //NestedScrollView mNestedScrollView;
 
     @ViewById(R.id.main_content)
     ViewGroup mMainContentView;
 
     Fragment currentFragment;
+
+    private BottomBar mBottomBar;
 
     @InstanceState
     int mFragmentNumber = 0;
@@ -80,57 +89,20 @@ public class MainActivity extends AppCompatActivity
 
     @AfterViews
     void syncViews() {
+
         setSupportActionBar(mToolbar);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        mNavigationView.setNavigationItemSelectedListener(this);
 
         if(mFragmentNumber == REPOS_FRAGMENT_NUMBER) {
             currentFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
         }
 
         changeFrament(currentFragment);
-    }
 
-    @Override
-    public void onBackPressed() {
-        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-            mDrawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+        //mBottomBar = BottomBar.attachShy(mMainCoordinator, mNestedScrollView, getIntent().getExtras());
 
-    @OptionsItem(R.id.action_settings)
-    void openSettings() {
-    }
+        mBottomBar = BottomBar.attach(this, getIntent().getExtras());
 
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        Fragment mainFragment = null;
-
-        if (id == R.id.nav_repos) {
-            mFragmentNumber = REPOS_FRAGMENT_NUMBER;
-
-            mainFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
-
-            mPreferences.setCurrentFragment(mFragmentNumber);
-        }
-
-        mDrawer.closeDrawer(GravityCompat.START);
-
-        changeFrament(mainFragment);
-
-        return true;
+        mBottomBar.setItemsFromMenu(R.menu.main_bottom_menu, this);
     }
 
     private void changeFrament(Fragment mainFragment) {
@@ -148,5 +120,31 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(RepoData item) {
         RepoDetailActivity_.intent(this).mRepoData(item).start();
+    }
+
+    @Override
+    public void onMenuTabSelected(@IdRes int menuItemId) {
+        Fragment mainFragment = null;
+        if (menuItemId == R.id.bottom_bar_item_repos) {
+            mFragmentNumber = REPOS_FRAGMENT_NUMBER;
+
+            mainFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
+
+            mPreferences.setCurrentFragment(mFragmentNumber);
+        }
+        changeFrament(mainFragment);
+    }
+
+    @Override
+    public void onMenuTabReSelected(@IdRes int menuItemId) {
+        Fragment mainFragment = null;
+        if (menuItemId == R.id.bottom_bar_item_repos) {
+                mFragmentNumber = REPOS_FRAGMENT_NUMBER;
+
+                mainFragment = RepoDataFragment_.instantiate(this, RepoDataFragment_.class.getName());
+
+                mPreferences.setCurrentFragment(mFragmentNumber);
+        }
+        changeFrament(mainFragment);
     }
 }
