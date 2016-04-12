@@ -81,4 +81,5 @@ dependencies {
     compile 'com.github.akashandroid90:imageletter:1.2'
 
     compile 'com.roughike:bottom-bar:1.3.2'
+    compile 'com.github.anshulagarwal06:PasswordEditText:v1.0'
 }

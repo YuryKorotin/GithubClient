@@ -55,6 +55,8 @@ import org.androidannotations.annotations.ViewById;
 
 import javax.inject.Inject;
 
+import in.anshul.libray.PasswordEditText;
+
 import static android.Manifest.permission.INSTALL_SHORTCUT;
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -79,9 +81,8 @@ public class LoginActivity extends AppCompatActivity implements RequestListener<
     @ViewById(R.id.email)
     AutoCompleteTextView mEmailView;
 
-    //TODO: ADd in.anshul.libray.PasswordEditText
     @ViewById(R.id.password)
-    EditText mPasswordView;
+    PasswordEditText mPasswordView;
 
     @ViewById(R.id.login_form)
     View mProgressView;
